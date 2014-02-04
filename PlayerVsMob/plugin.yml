@@ -1,0 +1,11 @@
+name : PlayerVsMob
+main: me.taemery0.PlayerVsMob.PlayerVsMob
+version: 1.2
+description: >
+             Player Vs Mob Battle
+commands:
+  pvm:
+    description: Teleport To PVM Arena
+  pvmadmin:
+    description: PVM Admin Command
+    usage: /<command> [removeall|tp|coords|reload]
