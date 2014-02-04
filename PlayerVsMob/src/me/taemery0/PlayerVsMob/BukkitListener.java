@@ -47,7 +47,7 @@ public class BukkitListener implements Listener {
 	}
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event){
-		// game.join(event.getPlayer());
+		event.getPlayer().sendMessage("Welcome to the PVM Server!");
 	}
 	@EventHandler
 	public void noFall(EntityDamageEvent event){
