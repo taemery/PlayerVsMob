@@ -16,31 +16,7 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 
 public class Vars {
-	static Plugin plugin = PlayerVsMob.getPlugin();
-	// public static double x{
-	// return plugin.getConfig().getDouble("X");
-	// }
-	public double x = plugin.getConfig().getDouble("X");
-	public double y = plugin.getConfig().getDouble("Y");
-	public double z = plugin.getConfig().getDouble("Z");
-	public World w = Bukkit.getWorld(plugin.getConfig().getString("WORLD"));
-	
-	public static Location arena0 = new Location(Bukkit.getWorld(plugin.getConfig().getString("arenas.0.w")), plugin.getConfig().getDouble("arenas.0.x"), plugin.getConfig().getDouble("arenas.0.y"), plugin.getConfig().getDouble("arenas.0.z"));
-	public static Location arena1 = new Location(Bukkit.getWorld(plugin.getConfig().getString("arenas.0.w")), plugin.getConfig().getDouble("arenas.0.x"), plugin.getConfig().getDouble("arenas.0.y"), plugin.getConfig().getDouble("arenas.0.z"));
-	public static Location arena2 = new Location(Bukkit.getWorld(plugin.getConfig().getString("arenas.0.w")), plugin.getConfig().getDouble("arenas.0.x"), plugin.getConfig().getDouble("arenas.0.y"), plugin.getConfig().getDouble("arenas.0.z"));	
-	
-	public static Location locations(String arenas) {
-		if(arenas == "0"){
-			return arena0;
-		}else if(arenas == "1"){
-			return arena1;
-		}else if(arenas == "2"){
-			return arena2;
-		}else{
-			return arena0;
-		}
-	}
-	
+	static Plugin plugin = PlayerVsMob.plugin;	
 	
 	public double lobbyx = plugin.getConfig().getDouble("lobby.x");
 	public double lobbyy = plugin.getConfig().getDouble("lobby.y");
@@ -68,6 +44,16 @@ public class Vars {
 	ItemStack boots = new ItemStack(Material.getMaterial(plugin.getConfig()
 			.getInt("boots")));
 	
+	//Arena Locations
+	public static Location arenas(int arena){
+		double x = plugin.getConfig().getDouble("arenas." + arena + ".x");
+		double y = plugin.getConfig().getDouble("arenas." + arena + ".y");
+		double z = plugin.getConfig().getDouble("arenas." + arena + ".z");
+		World w = Bukkit.getWorld(plugin.getConfig().getString("arenas." + arena + ".w"));
+		return new Location(w,x,y,z);
+	}
+	//End Arena Locations
+	
 	private static ScoreboardManager manager = Bukkit.getScoreboardManager();
 	private static Scoreboard board = manager.getNewScoreboard();
 	private static Objective objective = board.registerNewObjective("Kills", "totalKillCount");
@@ -83,5 +69,27 @@ public class Vars {
 	}
 	public static void resetPlayerScore (Player player){	
 		board.resetScores(player);
+	}
+	
+	public static boolean isInteger(String string){
+		try { 
+			@SuppressWarnings("unused")
+			int a = Integer.parseInt(string);
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    }
+	    return true;
+	}
+	public static boolean isActiveArena(String string){
+		int a;
+		try { 
+			a = Integer.parseInt(string);
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    }
+	    if(plugin.getConfig().getBoolean("arenas." + a + ".active", false)){
+	    	return true;
+	    }
+	    return false;
 	}
 }

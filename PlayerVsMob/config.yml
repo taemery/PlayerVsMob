@@ -1,8 +1,4 @@
 #Config for PVM Plugin by taemery0
-X: 0
-Y: 100
-Z: 0
-WORLD: world
 helmet: 7
 chestplate: 7
 leggings: 7
@@ -13,14 +9,7 @@ lobby:
   y: 100
   z: 50
   w: world
-#Currently only 3 (0,1,2) arenas supported!
 arenas:
-  0:
-    x: 0
-    y: 100
-    z: 0
-    w: world
-    active: false
   1:
     x: 0
     y: 100

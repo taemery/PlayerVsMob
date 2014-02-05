@@ -6,8 +6,12 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class game {
-	public static void join(Player player, String arenas){
+	public static void join(Player player, String arena){
 		Vars vars = new Vars();
+		if(!Vars.isActiveArena(arena)){
+			player.sendMessage(ChatColor.BLUE + "[PVM] " + ChatColor.RED + "That is not an active arena!");
+			return;
+		}
 		player.sendMessage(ChatColor.BLUE + "[PVM] " + ChatColor.GRAY
 				+ "Teleported To PVM Arena");
 		player.sendMessage(ChatColor.BLUE + "[PVM] " + ChatColor.GOLD
@@ -24,7 +28,7 @@ public class game {
 		player.getInventory().setLeggings(vars.leggings);
 		player.getInventory().setBoots(vars.boots);
 
-		player.teleport(Vars.locations(arenas));
+		player.teleport(Vars.arenas(Integer.valueOf(arena)));
 		
 		Vars.isInGame.put(player, true);
 	}

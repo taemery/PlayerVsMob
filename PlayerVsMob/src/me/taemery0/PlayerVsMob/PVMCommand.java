@@ -1,7 +1,6 @@
 package me.taemery0.PlayerVsMob;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,23 +14,26 @@ public class PVMCommand implements CommandExecutor {
 			String commandLabel, String[] args) {
 		if (sender instanceof Player) {
 			final Player player = (Player) sender;
-			if(args[0] == null){
-				sender.sendMessage(ChatColor.BLUE + "[PVM] " + ChatColor.RED + "Please select an arena");
-				return false;
+			if (Vars.isInGame.containsKey(player)) {
+				if (Vars.isInGame.get(player)) {
+					game.exit(player);
+					Vars.unboard(player);
+				} else {
+					if (args.length == 1) {
+						game.join(player, args[0]);
+						Vars.board(player);
+					}else{
+						player.sendMessage(ChatColor.BLUE + "[PVM] " + ChatColor.RED + "Must specify arena!");
+					}
+				}
+			} else {
+				if (args.length == 1) {
+					game.join(player, args[0]);
+					Vars.board(player);
+				}else{
+					player.sendMessage(ChatColor.BLUE + "[PVM] " + ChatColor.RED + "Must specify arena!");
+				}
 			}
-			if(Vars.isInGame.containsKey(player)){
-		        if(Vars.isInGame.get(player)){
-		            game.exit(player);
-		            Vars.unboard(player);
-			        player.playSound(vars.lobby, Sound.AMBIENCE_THUNDER, 1, 1);
-		        } else {
-		            game.join(player, args[0]);
-		            Vars.board(player);
-		        }
-		    } else {
-		        game.join(player, args[0]);
-		        Vars.board(player);
-		    }
 			/*
 			 * this.getServer().getScheduler().scheduleSyncRepeatingTask(this,
 			 * new Runnable() { public void run() { if (timer != -1){ if (timer
@@ -40,13 +42,12 @@ public class PVMCommand implements CommandExecutor {
 			 * + "Kill! Kill! Kill!"); timer--; } } } }, 0L, 20L);
 			 */
 
-
 		} else {
 			sender.sendMessage(ChatColor.RED
 					+ "You must be a player to run that command");
 			sender.sendMessage(ChatColor.BLUE + "Try /pvmadmin");
 		}
 		// Non-Player (Console) Commands
-		return false;		
+		return false;
 	}
 }
