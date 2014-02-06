@@ -42,8 +42,7 @@ public class game {
 		player.getInventory().setChestplate(null);
 		player.getInventory().setLeggings(null);
 		player.getInventory().setBoots(null);
-		Vars vars = new Vars();
-		player.teleport(vars.lobby);
+		player.teleport(Vars.lobby);
 		
 		// player.setScoreboard(null);
 		

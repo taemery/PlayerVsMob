@@ -8,4 +8,3 @@ commands:
     description: Teleport To PVM Arena
   pvmadmin:
     description: PVM Admin Command
-    usage: /<command> [removeall|tp|coords|reload]

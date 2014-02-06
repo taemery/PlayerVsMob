@@ -25,7 +25,7 @@ public class BukkitListener implements Listener {
 	public void onDeath(PlayerDeathEvent event){
 		if(Vars.isInGame.containsKey(event.getEntity())){
 			if(Vars.isInGame.get(event.getEntity())){
-				Vars.resetPlayerScore(event.getEntity());
+				scoreboard.resetPlayerScore(event.getEntity());
 				game.exit(event.getEntity());
 				event.getDrops().clear();
 				event.setDroppedExp(0);
@@ -47,7 +47,13 @@ public class BukkitListener implements Listener {
 	}
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event){
-		event.getPlayer().sendMessage("Welcome to the PVM Server!");
+		event.getPlayer().sendMessage("Welcome to the PVM Server!" + PlayerVsMob.plugin.getConfig().getString("lobby.teleport-on-join"));
+		if(PlayerVsMob.plugin.getConfig().getString("lobby.teleport-on-join") != "true"){
+			//
+		}else{
+			event.getPlayer().teleport(Vars.lobby);	
+		}
+		// scoreboard.playerStats(event.getPlayer());
 	}
 	@EventHandler
 	public void noFall(EntityDamageEvent event){

@@ -9,6 +9,7 @@ lobby:
   y: 100
   z: 50
   w: world
+  teleport-on-join: false
 arenas:
   1:
     x: 0

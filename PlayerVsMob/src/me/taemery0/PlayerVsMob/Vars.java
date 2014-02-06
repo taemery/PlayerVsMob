@@ -10,20 +10,14 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
 
 public class Vars {
 	static Plugin plugin = PlayerVsMob.plugin;	
 	
-	public double lobbyx = plugin.getConfig().getDouble("lobby.x");
-	public double lobbyy = plugin.getConfig().getDouble("lobby.y");
-	public double lobbyz = plugin.getConfig().getDouble("lobby.z");
-	public World lobbyw = Bukkit.getWorld(plugin.getConfig().getString("lobby.w"));
-	public Location lobby = new Location(lobbyw, lobbyx, lobbyy, lobbyz);
-
+	public static Location lobby = new Location(Bukkit.getWorld(plugin.getConfig().getString("lobby.w")),
+			plugin.getConfig().getDouble("lobby.x"),  plugin.getConfig().getDouble("lobby.y"), plugin.getConfig().getDouble("lobby.z"));
+	public static boolean lobbyTeleport = plugin.getConfig().getBoolean("lobby.teleport-on-join", false);
+	
 	public static boolean setupArenas () {
 		return false;
 	}
@@ -54,32 +48,6 @@ public class Vars {
 	}
 	//End Arena Locations
 	
-	private static ScoreboardManager manager = Bukkit.getScoreboardManager();
-	private static Scoreboard board = manager.getNewScoreboard();
-	private static Objective objective = board.registerNewObjective("Kills", "totalKillCount");
-	
-	public static void board (Player player) {
-		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-		player.setScoreboard(board);
-	}
-	public static void unboard (Player player){
-		ScoreboardManager manager = Bukkit.getScoreboardManager();
-		Scoreboard board = manager.getNewScoreboard();
-		player.setScoreboard(board);
-	}
-	public static void resetPlayerScore (Player player){	
-		board.resetScores(player);
-	}
-	
-	public static boolean isInteger(String string){
-		try { 
-			@SuppressWarnings("unused")
-			int a = Integer.parseInt(string);
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    }
-	    return true;
-	}
 	public static boolean isActiveArena(String string){
 		int a;
 		try { 
