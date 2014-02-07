@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
 public class Vars {
-	static Plugin plugin = PlayerVsMob.plugin;	
+	static Plugin plugin = PlayerVsMob.plugin;
 	
 	public static Location lobby = new Location(Bukkit.getWorld(plugin.getConfig().getString("lobby.w")),
 			plugin.getConfig().getDouble("lobby.x"),  plugin.getConfig().getDouble("lobby.y"), plugin.getConfig().getDouble("lobby.z"));
