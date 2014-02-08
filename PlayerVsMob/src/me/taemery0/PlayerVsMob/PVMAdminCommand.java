@@ -46,7 +46,7 @@ public class PVMAdminCommand implements CommandExecutor {
 				}
 				return true;
 			}else if (singlearg.equalsIgnoreCase("reload")) {
-				PlayerVsMob.getPlugin().reloadConfig();
+				PlayerVsMob.plugin.reloadConfig();
 				sender.sendMessage(ChatColor.BLUE + "[PVM] " + ChatColor.RED + "[Admin] " + ChatColor.GOLD + "Configuration Files Reloaded.");
 				return true;
 			}
