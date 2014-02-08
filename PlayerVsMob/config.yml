@@ -1,9 +1,16 @@
 #Config for PVM Plugin by taemery0
-helmet: 7
-chestplate: 7
-leggings: 7
-boots: 7
+helmet: 298
+chestplate: 299
+leggings: 300
+boots: 301
 timer: 15
+
+mysql:
+  host: test.com
+  user: user
+  password: password
+  db: db
+
 lobby:
   x: 0
   y: 100

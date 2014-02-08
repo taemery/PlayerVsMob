@@ -1,5 +1,7 @@
 package me.taemery0.PlayerVsMob;
 
+import java.sql.SQLException;
+
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -30,6 +32,8 @@ public class game {
 
 		player.teleport(Vars.arenas(Integer.valueOf(arena)));
 		
+		scoreboard.ingameScoreboard(player);
+		
 		Vars.isInGame.put(player, true);
 	}
 	public static void exit(Player player){
@@ -43,10 +47,16 @@ public class game {
 		player.getInventory().setLeggings(null);
 		player.getInventory().setBoots(null);
 		player.teleport(Vars.lobby);
-		
-		// player.setScoreboard(null);
-		
 		Vars.isInGame.put(player, false);
+		
+		try {
+			scoreboard.exitgameScoreboard(player);
+		} catch (IllegalStateException | IllegalArgumentException
+				| SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		scoreboard.statScoreboard(player);
 	}
 
 }

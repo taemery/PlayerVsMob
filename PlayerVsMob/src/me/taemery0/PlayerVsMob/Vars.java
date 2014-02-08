@@ -14,6 +14,12 @@ import org.bukkit.plugin.Plugin;
 public class Vars {
 	static Plugin plugin = PlayerVsMob.plugin;
 	
+	public static String host = plugin.getConfig().getString("mysql.host");
+	public static String user = plugin.getConfig().getString("mysql.user");
+	public static String password = plugin.getConfig().getString("mysql.password");
+	public static String db = plugin.getConfig().getString("mysql.db");
+	public static String dburl = "jdbc:mysql://" + host + "/" + db;
+	
 	public static Location lobby = new Location(Bukkit.getWorld(plugin.getConfig().getString("lobby.w")),
 			plugin.getConfig().getDouble("lobby.x"),  plugin.getConfig().getDouble("lobby.y"), plugin.getConfig().getDouble("lobby.z"));
 	public static boolean lobbyTeleport = plugin.getConfig().getBoolean("lobby.teleport-on-join", false);

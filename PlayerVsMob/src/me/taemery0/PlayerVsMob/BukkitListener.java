@@ -3,6 +3,7 @@ package me.taemery0.PlayerVsMob;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -30,7 +31,6 @@ public class BukkitListener implements Listener {
 	public void onDeath(PlayerDeathEvent event) {
 		if (Vars.isInGame.containsKey(event.getEntity())) {
 			if (Vars.isInGame.get(event.getEntity())) {
-				scoreboard.resetPlayerScore(event.getEntity());
 				game.exit(event.getEntity());
 				event.getDrops().clear();
 				event.setDroppedExp(0);
@@ -104,13 +104,17 @@ public class BukkitListener implements Listener {
 	public void onItemDrop(PlayerDropItemEvent event) {
 		event.setCancelled(true);
 	}
-
+	//Start Entity Death Event
+	//Handles Mob Drops, EXP, and gives points to player
 	@EventHandler
-	public void onMobDrop(EntityDeathEvent event) {
+	public void onMobKill(EntityDeathEvent event) {
 		event.getDrops().clear();
 		event.setDroppedExp(0);
-		// scoreboard.mobKill(event.getEntity().getKiller());
+		if(event.getEntity().getKiller() instanceof Player){
+			scoreboard.mobKill(event.getEntity().getKiller());
+		}
 	}
+	//End Entity Death Event
 
 	@EventHandler
 	public void onCreeperBlockBreak(EntityExplodeEvent event) {

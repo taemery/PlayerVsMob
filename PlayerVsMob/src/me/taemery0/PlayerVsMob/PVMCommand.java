@@ -17,11 +17,9 @@ public class PVMCommand implements CommandExecutor {
 			if (Vars.isInGame.containsKey(player)) {
 				if (Vars.isInGame.get(player)) {
 					game.exit(player);
-					scoreboard.unboard(player);
 				} else {
 					if (args.length == 1) {
 						game.join(player, args[0]);
-						scoreboard.board(player);
 					}else{
 						player.sendMessage(ChatColor.BLUE + "[PVM] " + ChatColor.RED + "Must specify arena!");
 					}
@@ -29,7 +27,6 @@ public class PVMCommand implements CommandExecutor {
 			} else {
 				if (args.length == 1) {
 					game.join(player, args[0]);
-					scoreboard.board(player);
 				}else{
 					player.sendMessage(ChatColor.BLUE + "[PVM] " + ChatColor.RED + "Must specify arena!");
 				}
